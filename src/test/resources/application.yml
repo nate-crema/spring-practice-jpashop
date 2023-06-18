@@ -1,0 +1,18 @@
+spring: # 기본 설정값이 없을 경우 in-memory db와 자동으로 연결
+#  datasource:
+#    url: jdbc:h2:mem:test # spring boot 내부에 포함되어있는 in-memory db와 연결되어 테스트가 진행됨
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: create # +) create-drop: application 종료 시점에 table drop query를 실행해줌
+#    properties:
+#      hibernate:
+##        show_sql: true
+#        format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
