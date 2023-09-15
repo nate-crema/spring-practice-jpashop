@@ -41,4 +41,27 @@ public class ItemController {
         model.addAttribute("items", items);
         return "items/itemList";
     }
+
+    @GetMapping(value = "/items/{itemId}/edit")
+    public String updateItemForm( @PathVariable("itemId") Long itemId, Model model ) {
+//        Item item = itemService.findItem(itemId);
+        Book item = (Book) itemService.findItem(itemId);
+
+        BookForm form = new BookForm();
+        form.setId( item.getId() );
+        form.setName( item.getName() );
+        form.setPrice( item.getPrice() );
+        form.setStockQuantity( item.getStockQuantity() );
+        form.setAuthor( item.getAuthor() );
+        form.setIsbn( item.getIsbn() );
+
+        model.addAttribute( "form", form );
+        return "items/updateItemForm";
+    }
+
+    @PostMapping(value = "/items/{itemId}/edit")
+    public String updateItem( @ModelAttribute("form") BookForm form, @PathVariable Long itemId ) {
+        itemService.updateItem( itemId, form.getName(), form.getPrice(), form.getStockQuantity() );
+        return "redirect:/items";
+    }
 }
