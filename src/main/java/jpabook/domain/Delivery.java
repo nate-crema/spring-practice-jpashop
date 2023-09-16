@@ -1,5 +1,6 @@
 package jpabook.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ public class Delivery {
     @Column(name = "delivery_id")
     private Long id;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
     // +) 1대1 관계인 경우 FK의 위치가 무관하지만, 조회횟수 등을 고려했을 때 가장 데이터접근이 많은 쪽에 FK를 배치하는 것이 유용
     // (별도 필터링과정 없이 JOIN을 통해 값을 바로 가져올 수 있기 때문)

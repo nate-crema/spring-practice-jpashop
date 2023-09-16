@@ -5,6 +5,7 @@ import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
 import jpabook.domain.Member;
 import jpabook.domain.Order;
+import jpabook.repository.order.simplequery.OrderSimpleQueryDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -98,5 +99,17 @@ public class OrderRepository {
         cq.where(cb.and(criteria.toArray(new Predicate[criteria.size()])));
         TypedQuery<Order> query = em.createQuery(cq).setMaxResults(1000); //최대 1000건
         return query.getResultList();
+    }
+
+    /**
+     * fetch join을 사용하여 데이터를 한번의 쿼리로 모두 불러옵니다
+     * @return
+     */
+    public List<Order> findAllWithMemberDelivery() {
+        return em.createQuery(
+            "select o from Order o" +
+            " join fetch o.member m" +
+            " join fetch o.delivery d"
+        , Order.class ).getResultList();
     }
 }
