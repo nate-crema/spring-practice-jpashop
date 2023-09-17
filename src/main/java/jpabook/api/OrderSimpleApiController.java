@@ -1,4 +1,4 @@
-package jpabook.controller;
+package jpabook.api;
 
 import jpabook.domain.Order;
 import jpabook.repository.OrderRepository;
