@@ -13,6 +13,7 @@ public class OrderItem {
     @Column(name = "order_item_id")
     private Long id;
 
+    @ManyToOne
     private Item item;
 
     @ManyToOne
