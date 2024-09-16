@@ -1,8 +1,12 @@
 package jpabook.jpashop.domain.item;
 
 import jakarta.persistence.*;
+import jpabook.jpashop.domain.Category;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -23,4 +27,8 @@ public abstract class Item {
 
     private int stockQuantity;
 
+    @ManyToMany(mappedBy = "items")
+    // ㄴ> mappedBy에는 상대 'Entity와 mapping될 field명'이 들어가야 하므로
+    // | 연결되는 column명이 다르더라도 이와는 무관하게 field명으로 작성
+    private List<Category> categories = new ArrayList<>();
 }

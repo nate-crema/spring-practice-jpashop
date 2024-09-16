@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/../data/data
+    url: jdbc:h2:tcp://localhost/~/Documents/Database/spring-practice-jpashop/data/data
     username: sa
     password:
     driver-class-name: org.h2.Driver
