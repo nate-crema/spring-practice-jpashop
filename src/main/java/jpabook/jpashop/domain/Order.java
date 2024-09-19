@@ -17,14 +17,15 @@ public class Order {
     @Column( name = "order_id" )
     private Long id;
 
-    @ManyToOne //: '현재 Entity 기준' 여러개가 상대의 1개에 대응됨을 명시
+    @ManyToOne(fetch = FetchType.LAZY) //: '현재 Entity 기준' 여러개가 상대의 1개에 대응됨을 명시
     @JoinColumn( name="member_id" ) //: SQL에서 join 할 column 이름을 지정
     private Member member;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    // : [option: 'cascade'] Order Entity가 저장될 때, orderItems에게도 명령이 전파되도록 하는 것
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 

@@ -13,6 +13,7 @@ public class Delivery {
     private Long id;
 
     @OneToOne(mappedBy = "delivery")
+    // : 연관관계의 주인이 아니기때문에, Hibernate 5 버전 이후에서의 설계전략 상 LAZY 조회가 불가능항
     private Order order;
 
     private Address address;
